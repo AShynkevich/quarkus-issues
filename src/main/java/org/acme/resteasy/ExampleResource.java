@@ -1,16 +1,21 @@
 package org.acme.resteasy;
 
-import javax.ws.rs.GET;
+import java.io.File;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
-@Path("/resteasy/hello")
+@Path("/upload")
 public class ExampleResource {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "hello";
+    @POST
+    @Path("/files")
+    public void uploadFile(File file) {
+        long byteSize = file.length();
+        long kiloByteSize = byteSize / 1024 ;
+        long megaBytesSize = kiloByteSize / 1024;
+        System.out.println("bytes: " + byteSize);
+        System.out.println("kilobytes: " + kiloByteSize);
+        System.out.println("megabytes: " + megaBytesSize);
+        System.out.println(file.getName());
     }
 }
